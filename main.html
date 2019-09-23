@@ -1,29 +1,24 @@
-<mdb-carousel class="carousel slide" [isControls]="false" [animation]="'slide'" [interval]="'5000'" #carousel>
-    <mdb-carousel-item>
-        <div class="view">
-            <img class="d-block"
-                src="https://wallpaper.wiki/wp-content/uploads/2017/05/wallpaper.wiki-Full-HD-1920x1080-Nature-Wallpapers-PIC-WPE0012781.jpg"
-                alt="First slide">
-            <div class="mask flex-center">
-            </div>
+
+<mdb-carousel class="carousel slide" [isControls]="false" [animation]="'slide'" [interval]="'3000'" #carousel>
+    <div *ngFor="let notice of notices">
+        <div *ngFor="let image of notice.images; let i = index">
+            <mdb-carousel-item>
+                <div class="view">
+                    <img class="d-block" [src]="image.url" alt="slide">
+                    <div class="mask flex-center"></div>
+                    <video [autoplay] [ngStyle]="{ none: none }"></video>
+                </div>
+            </mdb-carousel-item>
         </div>
-    </mdb-carousel-item>
-    <mdb-carousel-item>
-        <div class="view">
-            <video class="video-fluid" autoplay>
-                <source
-                    src="https://firebasestorage.googleapis.com/v0/b/diginot-24fa3.appspot.com/o/Creative%20Flipkart%20Kids%20ad%20-%2030Sec.mp4?alt=media&token=5f9b5720-ddb0-41ea-85aa-f3757572ae6b"
-                    type="video/mp4" />
-            </video>
-            <div class="mask waves-light" mdbWavesEffect></div>
+        <div *ngFor="let video of notice.videos">
+            <mdb-carousel-item>
+                <div class="view">
+                    <video class="video-fluid" (play)="videoStarted()" (ended)="videoEnded()">
+                        <source [src]="video.url" type="video/mp4">
+                    </video>
+                    <div class="mask waves-light" mdbWavesEffect></div>
+                </div>
+            </mdb-carousel-item>
         </div>
-    </mdb-carousel-item>
-    <mdb-carousel-item>
-        <div class="view">
-            <video autoplay class="video-fluid">
-                <source src="https://mdbootstrap.com/img/video/Tropical.mp4" type="video/mp4" />
-            </video>
-            <div class="mask waves-light" mdbWavesEffect></div>
-        </div>
-    </mdb-carousel-item>
+    </div>
 </mdb-carousel>
